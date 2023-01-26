@@ -8,8 +8,9 @@ WiFiServer server(80);
 
 void setup() {
   pinMode(relayPin, OUTPUT);
-  Serial.begin(9600);
+  digitalWrite(relayPin, HIGH);
   digitalWrite(relayPin, LOW);
+  Serial.begin(9600);
 
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
@@ -40,16 +41,16 @@ void loop() {
       client.println("Connection: close");
       client.println();
       if (value > 0) {
-        Serial.println("STATOS: " + (String)value);
-        digitalWrite(relayPin, HIGH);
+        Serial.println("LESS: " + (String)value);
+        digitalWrite(relayPin, LOW);
         client.println("ON");
       } else {
         value = statusStr.indexOf("LOW");
         if (value < 0) {
           client.println("INVALID CMD");
         } else {
-          Serial.println("LESS: " + (String)value);
-          digitalWrite(relayPin, LOW);
+          Serial.println("STATOS: " + (String)value);
+          digitalWrite(relayPin, HIGH);  
           client.println("OFF");
         }
       }
