@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css" />
+    <title>⚡AUTO-TURN</title>
+</head>
+
+<body>
+    <h2>Welcome!</h2>
+    <button class="light on" onClick="turnOnOrOff()">Turn ON</button>
+    <script>
+        const turnOnOrOff = async (e) => {
+            console.log(this);
+            var xhr = new XMLHttpRequest();
+            return;
+            xhr.open("POST", "http://192.168.1.100:80", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = xhr.responseText;
+                    console.log(response);
+                }
+            };
+            xhr.send("data=Hello ESP8266!");
+        }
+    </script>
+</body>
+
+</html>

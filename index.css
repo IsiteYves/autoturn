@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #fafafa;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+button {
+    margin-top: 1rem;
+    background: orangered;
+    border-radius: 4px;
+    padding: 15px 25px;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-weight: 700;
+    font-size: 17px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.on {
+    background: orangered;
+}
+
+.off {
+    background: #333;
+}
+
+.on:hover {
+    background: #ff703c;
+}
+
+.off:hover {
+    background: rgb(85, 82, 82);
+}
