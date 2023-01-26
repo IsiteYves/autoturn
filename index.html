@@ -19,7 +19,7 @@
             turnBtn.innerHTML = `Turning ${status === "off" ? "on" : "off"}...`
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
-                console.log("readee", xhr.readyState, xhr.status, "'" + xhr.responseText + "'")
+                //console.log("readee", xhr.readyState, xhr.status, "'" + xhr.responseText + "'")
                 if (xhr.readyState === 4) {
                     // var response = xhr.responseText;
                     turnBtn.classList.remove(`${status}`)

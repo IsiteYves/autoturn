@@ -30,7 +30,6 @@ void loop() {
 
     int statIndex = request.indexOf("datastatus=");
     if (statIndex != -1) {
-      digitalWrite(relayPin, LOW);
       String statusStr = request.substring(statIndex);
       int value = statusStr.indexOf("HIGH");
       client.println("HTTP/1.1 200 OK");
@@ -41,15 +40,17 @@ void loop() {
       client.println("Connection: close");
       client.println();
       if (value > 0) {
+        Serial.println("STATOS: " + (String)value);
         digitalWrite(relayPin, HIGH);
         client.println("ON");
       } else {
         value = statusStr.indexOf("LOW");
-        if (value > 0) {
+        if (value < 0) {
+          client.println("INVALID CMD");
+        } else {
+          Serial.println("LESS: " + (String)value);
           digitalWrite(relayPin, LOW);
           client.println("OFF");
-        } else {
-          client.println("INVALID CMD");
         }
       }
       client.stop();
