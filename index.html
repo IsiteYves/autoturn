@@ -11,21 +11,26 @@
 
 <body>
     <h2>Welcome!</h2>
-    <button class="light on" onClick="turnOnOrOff()">Turn ON</button>
+    <button class="light off" onClick="turnOnOrOff()" id="turn-button" data-status="off">Turned OFF</button>
     <script>
-        const turnOnOrOff = async (e) => {
-            console.log(this);
+        const turnOnOrOff = () => {
+            const turnBtn = document.querySelector('#turn-button')
+            const status = turnBtn.getAttribute("data-status")
+            turnBtn.innerHTML = `Turning ${status === "off" ? "on" : "off"}...`
             var xhr = new XMLHttpRequest();
-            return;
-            xhr.open("POST", "http://192.168.1.100:80", true);
-            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    var response = xhr.responseText;
-                    console.log(response);
+                console.log("readee", xhr.readyState, xhr.status, "'" + xhr.responseText + "'")
+                if (xhr.readyState === 4) {
+                    // var response = xhr.responseText;
+                    turnBtn.classList.remove(`${status}`)
+                    turnBtn.classList.add(`${status === "off" ? "on" : "off"}`)
+                    turnBtn.setAttribute("data-status", `${status === "off" ? "on" : "off"}`)
+                    turnBtn.innerHTML = `Turned ${status === "off" ? "ON" : "OFF"}`;
                 }
             };
-            xhr.send("data=Hello ESP8266!");
+            xhr.open("GET", "http://192.168.8.111:80/" + `?datastatus=${status === "off" ? "HIGH" : "LOW"}`);
+            // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send();
         }
     </script>
 </body>

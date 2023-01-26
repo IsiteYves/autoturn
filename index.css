@@ -6,8 +6,9 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: #fafafa;
+    background: rgb(32,33,35);
     display: flex;
+    color: #fff;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -33,7 +34,7 @@ button {
 }
 
 .off {
-    background: #333;
+    background: rgb(57, 54, 54);
 }
 
 .on:hover {
