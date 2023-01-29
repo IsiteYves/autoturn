@@ -42,7 +42,16 @@
         window.onload = () => {
             try {
                 const stored = localStorage.getItem("lgdi");
+                let loggedIn = true;
                 if (!stored) {
+                    loggedIn = false;
+                } else {
+                    const storedObj = JSON.parse(stored);
+                    if (storedObj?.email !== "admin@switches.net" || storedObj?.password !== "123switch") {
+                        loggedIn = false;
+                    }
+                }
+                if (!loggedIn) {
                     alert(`You need to login first`);
                     window.location.href = "http://localhost/autoturn"
                 }

@@ -15,7 +15,23 @@
       }
     }
 
-    return check;
+    const email = $("#email-field").val();
+    const password = $("#pass-field").val();
+    try {
+      if (check) {
+        if (email != "admin@switches.net" || password != "123switch") {
+          alert("Invalid email or password");
+          return false;
+        } else {
+          localStorage.setItem("lgdi", JSON.stringify({ email, password }));
+          $(location).attr("href", "http://localhost/autoturn/switch.php");
+        }
+      }
+    } catch (e) {
+      alert(e.message);
+    }
+
+    return false;
   });
 
   $(".validate-form .input100").each(function () {
