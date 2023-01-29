@@ -10,9 +10,15 @@
 </head>
 
 <body>
-    <h2>Welcome!</h2>
-    <button class="light off" onClick="turnOnOrOff()" id="turn-button" data-status="off">Turned OFF</button>
+    <a href="#" id="logout">Logout</a>
+    <h2>Welcome Switcher Admin!</h2>
+    <button class=" light off" onClick="turnOnOrOff()" id="turn-button" data-status="off">Turned OFF</button>
     <script>
+        const logoutBtn = document.querySelector('#logout');
+        logoutBtn.onclick = () => {
+            localStorage.removeItem("lgdi");
+            window.location.href = "http://localhost/autoturn"
+        }
         const turnOnOrOff = () => {
             const turnBtn = document.querySelector('#turn-button')
             const status = turnBtn.getAttribute("data-status")

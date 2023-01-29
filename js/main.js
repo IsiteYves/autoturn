@@ -4,6 +4,24 @@
   /*==================================================================
     [ Validate ]*/
   var input = $(".validate-input .input100");
+  try {
+    const stored = localStorage.getItem("lgdi");
+    let loggedIn = false;
+    if (stored) {
+      const storedObj = JSON.parse(stored);
+      if (
+        storedObj?.email == "admin@switches.net" &&
+        storedObj?.password == "123switch"
+      ) {
+        loggedIn = true;
+      }
+    }
+    if (loggedIn) {
+      $(location).attr("href", "http://localhost/autoturn/switch.php");
+    }
+  } catch (err) {
+    alert(`Error: ${err.message}`);
+  }
 
   $(".validate-form").on("submit", function () {
     var check = true;
