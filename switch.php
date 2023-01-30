@@ -60,7 +60,7 @@
             buttonEl.setAttribute('data-status', 'off');
             buttonEl.innerHTML = 'Turned OFF';
             buttonEl.onclick = () => {
-                turnOnOrOff(buttonEl, device)
+                turnOnOrOff(buttonEl, device_ip)
             }
             deviceDiv.id = "device";
             deviceDiv.innerHTML = `
