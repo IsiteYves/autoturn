@@ -7,12 +7,21 @@
 body {
     font-family: Arial, sans-serif;
     background: rgb(32,33,35);
-    display: flex;
+    /* display: flex; */
+    text-align: center;
     color: #fff;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     height: 100vh;
+}
+
+body > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: fit-content;
 }
 
 a {
@@ -24,7 +33,8 @@ a {
 }
 
 a,
-button {
+button,
+input[type=submit] {
     margin-top: 1rem;
     background: orangered;
     border-radius: 4px;
@@ -52,4 +62,108 @@ button {
 
 .off:hover {
     background: rgb(85, 82, 82);
+}
+form {
+    background: #fff;
+    padding: 2rem;
+    margin: auto;
+    text-align: center;
+    border-radius: 6px;
+    margin-top: 2rem;
+}
+
+#devices,form {
+    min-width: 35vw;
+}
+
+form > div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+#devices {
+    display: flex;
+    flex-direction: column;
+}
+
+#device {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    background: #fff;
+    color:rgb(57, 54, 54);
+}
+
+#device > div > button {
+    padding: 9px 13px !important;
+    margin-top: unset !important
+}
+
+form > div > input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    font-size: 17px;
+    margin-top: 5px;
+}
+
+.delete {
+    color: #ff0000;
+    margin-right: 2rem;
+    cursor: pointer;
+}
+
+form > div > input:focus {
+    border: 1px solid #6c6cfa;
+}
+
+form > div > label {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #606060;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+input[type=submit] {
+    background: #6c6cfa;
+}
+
+input[type=submit]:hover {
+    background: dodgerblue;
+}
+
+#no-devices-yet {
+    color: orange;
+    margin-top: 1rem;
+}
+
+@media screen and (max-width: 1250px) {
+    #devices,form {
+        min-width: 60vw !important;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    #devices,form {
+        min-width: 65vw !important;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    a {
+        top: 1.5rem;
+        left: 1.5rem;
+    }
+    #devices,form {
+        min-width: 90vw !important;
+    }
 }

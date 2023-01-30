@@ -1,7 +1,7 @@
 #include <ESP8266WiFi.h>
 
-const char* ssid = "KAMARA-4E6A";
-const char* password = "KAMARA450";
+const char* ssid = "NXT2";
+const char* password = "ivy123iy";
 
 int relayPin = D7;
 WiFiServer server(80);
@@ -49,7 +49,7 @@ void loop() {
         if (value < 0) {
           client.println("INVALID CMD");
         } else {
-          Serial.println("STATOS: " + (String)value);
+          Serial.println("HIGH: " + (String)value);
           digitalWrite(relayPin, HIGH);  
           client.println("OFF");
         }
