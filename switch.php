@@ -13,7 +13,7 @@
 <body>
     <a href="#" id="logout" class="on">Logout</a>
     <div>
-        <h2>Welcome, Switcher Admin!</h2>
+        <h2>Welcome, OTI Switch Admin!</h2>
         <!-- <button class="light off" onClick="turnOnOrOff()" id="turn-button" data-status="off">Turned OFF</button> -->
         <div id="devices"></div>
         <form action="#" method="POST" id="device-add-form">
@@ -60,7 +60,10 @@
             buttonEl.setAttribute('data-status', 'off');
             buttonEl.innerHTML = 'Turned OFF';
             buttonEl.onclick = () => {
-                turnOnOrOff(buttonEl, device_ip)
+                turnOnOrOff(buttonEl, {
+                    device_ip,
+                    device_name
+                })
             }
             deviceDiv.id = "device";
             deviceDiv.innerHTML = `
@@ -78,7 +81,7 @@
             devices.appendChild(deviceDiv);
         }
 
-        const turnOnOrOff = (turnBtn, device_ip) => {
+        const turnOnOrOff = (turnBtn, device) => {
             const status = turnBtn.getAttribute("data-status")
             turnBtn.innerHTML = `Turning ${status === "off" ? "on" : "off"}...`
             var xhr = new XMLHttpRequest();
@@ -91,12 +94,22 @@
                         turnBtn.classList.add(`${status === "off" ? "on" : "off"}`)
                         turnBtn.setAttribute("data-status", `${status === "off" ? "on" : "off"}`)
                         turnBtn.innerHTML = `Turned ${status === "off" ? "ON" : "OFF"}`;
+
+                        const xhr1 = new XMLHttpRequest();
+                        xhr1.open("POST", "./utils/add_data.php", true);
+                        xhr1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                        xhr1.onreadystatechange = function() {
+                            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                                console.log("yasubije...", this.responseText);
+                            }
+                        };
+                        xhr.send(`device_name=${device.device_name}&data_status=${status === "off" ? "ON" : "OFF"}`);
                     }
                 };
             } catch (err) {
                 alert(`Error: ${err.message}`)
             }
-            xhr.open("GET", `${device_ip}:80/` + `?datastatus=${status === "off" ? "HIGH" : "LOW"}`);
+            xhr.open("GET", `${device.device_ip}:80/` + `?datastatus=${status === "off" ? "HIGH" : "LOW"}`);
             // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhr.send();
         }
