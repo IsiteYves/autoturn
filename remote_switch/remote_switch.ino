@@ -1,7 +1,7 @@
 #include <ESP8266WiFi.h>
 
-const char* ssid = "NXT2";
-const char* password = "ivy123iy";
+const char* ssid = "RCA-WiFii";
+const char* password = "@rca@2023";
 
 int relayPin = D7;
 WiFiServer server(80);

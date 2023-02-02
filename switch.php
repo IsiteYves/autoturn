@@ -98,12 +98,10 @@
                         const xhr1 = new XMLHttpRequest();
                         xhr1.open("POST", "./utils/add_data.php", true);
                         xhr1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                        xhr1.onreadystatechange = function() {
-                            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                                console.log("yasubije...", this.responseText);
-                            }
-                        };
-                        xhr.send(`device_name=${device.device_name}&data_status=${status === "off" ? "ON" : "OFF"}`);
+                        // xhr1.onreadystatechange = function() {
+                        //     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {}
+                        // };
+                        xhr1.send(`device_name=${device.device_name}&data_status=${status === "off" ? "ON" : "OFF"}`);
                     }
                 };
             } catch (err) {
