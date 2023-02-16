@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="../index.css" />
     <title>⚡AUTO-TURN</title>
 </head>
 
@@ -86,30 +86,30 @@
             turnBtn.innerHTML = `Turning ${status === "off" ? "on" : "off"}...`
             var xhr = new XMLHttpRequest();
             try {
-                xhr.onreadystatechange = function() {
-                    //console.log("readee", xhr.readyState, xhr.status, "'" + xhr.responseText + "'")
-                    if (xhr.readyState === 4) {
-                        // var response = xhr.responseText;
-                        turnBtn.classList.remove(`${status}`)
-                        turnBtn.classList.add(`${status === "off" ? "on" : "off"}`)
-                        turnBtn.setAttribute("data-status", `${status === "off" ? "on" : "off"}`)
-                        turnBtn.innerHTML = `Turned ${status === "off" ? "ON" : "OFF"}`;
+                // xhr.onreadystatechange = function() {
+                //console.log("readee", xhr.readyState, xhr.status, "'" + xhr.responseText + "'")
+                // if (xhr.readyState === 4) {
+                // var response = xhr.responseText;
+                turnBtn.classList.remove(`${status}`)
+                turnBtn.classList.add(`${status === "off" ? "on" : "off"}`)
+                turnBtn.setAttribute("data-status", `${status === "off" ? "on" : "off"}`)
+                turnBtn.innerHTML = `Turned ${status === "off" ? "ON" : "OFF"}`;
 
-                        const xhr1 = new XMLHttpRequest();
-                        xhr1.open("POST", "./utils/add_data.php", true);
-                        xhr1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                        // xhr1.onreadystatechange = function() {
-                        //     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {}
-                        // };
-                        xhr1.send(`device_name=${device.device_name}&data_status=${status === "off" ? "ON" : "OFF"}`);
-                    }
-                };
+                const xhr1 = new XMLHttpRequest();
+                xhr1.open("POST", "../utils/add_data.php", true);
+                xhr1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                // xhr1.onreadystatechange = function() {
+                //     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {}
+                // };
+                xhr1.send(`device_name=${device.device_name}&data_status=${status === "off" ? "ON" : "OFF"}`);
+                //     }
+                // };
             } catch (err) {
                 alert(`Error: ${err.message}`)
             }
-            xhr.open("GET", `${device.device_ip}:80/` + `?datastatus=${status === "off" ? "HIGH" : "LOW"}`);
+            // xhr.open("GET", `https://${device.device_ip}:443/` + `?datastatus=${status === "off" ? "HIGH" : "LOW"}`);
             // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhr.send();
+            // xhr.send();
         }
 
         const deviceAddForm = document.querySelector('#device-add-form');
@@ -201,7 +201,7 @@
                 if (noDevicesYet) devices.innerHTML = `<h3 id="no-devices-yet">No devices on the list</h3>`
             } catch (err) {
                 alert(`Error: ${err.message}`);
-                window.location.location = "localhost/autoturn"
+                window.location.href = "http://localhost/autoturn"
             }
         }
     </script>

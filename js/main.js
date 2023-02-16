@@ -17,7 +17,7 @@
       }
     }
     if (loggedIn) {
-      $(location).attr("href", "http://localhost/autoturn/switch.php");
+      $(location).attr("href", "http://localhost/autoturn/switch");
     }
   } catch (err) {
     alert(`Error: ${err.message}`);
@@ -42,7 +42,7 @@
           return false;
         } else {
           localStorage.setItem("lgdi", JSON.stringify({ email, password }));
-          $(location).attr("href", "http://localhost/autoturn/switch.php");
+          $(location).attr("href", "http://localhost/autoturn/switch");
         }
       }
     } catch (e) {
