@@ -12,23 +12,20 @@ int relayPin = D7;
 String payload = "deviceip=";
 
 void turnOnOrOff(String request) {
-  Serial.println(request);
   int statIndex = request.indexOf("datastatus");
-  if (statIndex != -1) {
-    String statusStr = request.substring(statIndex);
-    int value = statusStr.indexOf("HIGH");
-    if (value > 0) {
-      Serial.println("LESS: " + (String)value);
-      digitalWrite(relayPin, LOW);
-    } else {
-      value = statusStr.indexOf("LOW");
-      if (value < 0) {
-        Serial.println("INVALID");
-      } else {
-        Serial.println("HIGH: " + (String)value);
-        digitalWrite(relayPin, HIGH);
-      }
-    }
+  // String statusStr = request.substring(statIndex);
+  int value = request.indexOf("ON");
+  if (value > 0) {
+    Serial.println("ON!");
+    digitalWrite(relayPin, LOW);
+  } else {
+    Serial.println("LOW!");
+    digitalWrite(relayPin, HIGH);
+    //    value = request.indexOf("LOW");
+    //    if (value < 0) {
+    //      Serial.println("INVALID");
+    //    } else {
+    //    }
   }
 }
 
@@ -47,12 +44,11 @@ void setup() {
   Serial.print("IP: ");
   Serial.print(WiFi.localIP());
   payload += WiFi.localIP().toString();
-  Serial.println("payload: " + payload);
 }
 
 void loop() {
   http.connect("iot.benax.rw", 80);
-  http.println("POST /projects/b9a31af7237a309d8f2654f837fd2871/autoturn/utils/check_light_status.php HTTP/1.1");
+  http.println("GET /projects/b9a31af7237a309d8f2654f837fd2871/autoturn/utils/check_light_status.php HTTP/1.1");
   http.println("Host: iot.benax.rw");
   http.println("User-Agent: ESP8266/1.0");
   http.println("Content-Type: application/json");
@@ -62,7 +58,6 @@ void loop() {
   String response = "";
   response += http.readStringUntil('\r');
   String payload2 = http.readString();
-  Serial.println("response: " + payload2);
   turnOnOrOff(payload2);
-  delay(2000);
+  // delay(100);
 }
